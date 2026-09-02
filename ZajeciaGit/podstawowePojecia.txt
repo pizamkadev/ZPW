@@ -1,0 +1,8 @@
+Repozytorium - jest to zbiór plików.
+Github/bitbucket/gitlab - przchowuje kody open-source oraz dzięki nim możemy zarządzać projektami
+Git - program do śledzący zmiany kodu
+Commit - zapis zmian z dodatkowym opisem
+Branch - tworzenie osobnej gałęzi
+Checkout - przejści między gałęziami
+merge - połączenie zmian z inną gołęzi
+rebase - łączenie gałęzi z uporządkowanmiem historii zmian
