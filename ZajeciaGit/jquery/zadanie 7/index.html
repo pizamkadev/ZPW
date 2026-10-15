@@ -14,28 +14,63 @@
         //     $("#pageY").text(event.pageY)
         // })
 
-        $(function(){
-            $("#japko").css("margin-left",  Math.floor((Math.random() * 500) + 1))
-            $("#japko").css("margin-top",  Math.floor((Math.random() * 500) + 1))
-        })
+        // Keep track of positions in memory for easier collision checking
+let kwadratPos = { top: 0, left: 0 };
+let japkoPos = { top: 0, left: 0 };
 
-        $(document).on("keypress", function(key){
-            if(key.key === "a"){
-                $("#kwadrat").css("margin-left", "-=5px")
-            }
-            
-            if (key.key === 'd'){
-                $("#kwadrat").css("margin-left", "+=5px")
-            }
+function randomPos() {
+    return Math.floor(Math.random() * 500) + 1;
+}
 
-            if(key.key === "w"){
-                $("#kwadrat").css("margin-top", "-=5px")
-            }
-            
-            if (key.key === 's'){
-                $("#kwadrat").css("margin-top", "+=5px")
-            }
-        })
+// Initialize positions on load
+$(function(){
+    japkoPos.left = randomPos();
+    japkoPos.top = randomPos();
+    
+    $("#japko").css({ "margin-left": japkoPos.left, "margin-top": japkoPos.top });
+});
+
+// Use 'keydown' for smoother movement
+$(document).on("keydown", function(key){
+    let $kwadrat = $("#kwadrat");
+    
+    if(key.key === "a"){
+        $kwadrat.css("margin-left", "-=5px");
+    }
+    if(key.key === 'd'){
+        $kwadrat.css("margin-left", "+=5px");
+    }
+    if(key.key === "w"){
+        $kwadrat.css("margin-top", "-=5px");
+    }
+    if(key.key === 's'){
+        $kwadrat.css("margin-top", "+=5px");
+    }
+
+    // Read current actual positions from the DOM
+    let currentKwadratLeft = parseFloat($kwadrat.css("margin-left")) || 0;
+    let currentKwadratTop = parseFloat($kwadrat.css("margin-top")) || 0;
+
+    console.log(currentKwadratTop, " ", currentKwadratLeft, " ", japkoPos.top, " ", japkoPos.left);
+
+    // Collision check: check if the square is close enough to the apple (e.g., within 5 pixels)
+    let threshold = 5;
+    if (
+        Math.abs(currentKwadratLeft - japkoPos.left) <= threshold &&
+        Math.abs(currentKwadratTop - japkoPos.top) <= threshold
+    ) {
+        // Respawn apple
+        japkoPos.left = randomPos();
+        japkoPos.top = randomPos();
+
+        $("#kwadrat").css({
+            "height": "+=5",
+            "width": "+=5"
+        })        
+        $("#japko").css({ "margin-left": japkoPos.left, "margin-top": japkoPos.top });
+        console.log("Score! Apple moved.");
+    }
+});
     </script>
     <title>Document</title>
     <style>
