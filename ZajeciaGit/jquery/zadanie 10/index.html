@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            $("#newsletter").change(function(){
+                if($(this).is(":checked")){
+                    $("#stan").text("Zapisano do newslettera")
+                } else {
+                    $("#stan").text("Wypisano z newslettera")
+                }
+            })
+
+            $("#tekst").on("input", function(){
+                $("#licznik").text(100 - $(this).val().length)
+                if((100 - $(this).val().length) <= 10){
+                    $("#licznik").css("color", "red")
+                }else {
+                    $("#licznik").css("color", "black")
+                }
+            })
+        })
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" id="newsletter"> Chcę newslatter </input>
+    <p id="stan"></p>
+    <hr>
+
+    <input type="checkbox" id="regulamin">Akceptuję regulamin</input>
+    <button id="signin" disabled >Zarejestruj</button>
+    <hr>
+
+    <p>Podgląd: <span id="licznik">100</span></p>
+    <textarea id="tekst" maxlength="100"></textarea>
+</body>
+</html>
