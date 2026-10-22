@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            $("#send").click(function(event){
+                event.preventDefault()
+                $("#wiadomosc").text("")
+                let name = $("#nazwisko").val().trim()
+                if (name === ""){
+                    $("#blad").text("Podaj Nazwisko").css("color", "red")
+                }else {
+                    $("#wiadomosc").text("Wysłano wiadomość").css("color", "green")
+                }
+            })
+
+            $("#sprawdzWiek").click(function(){
+                let wiek = Number($("#wiek").val())
+
+                if(isNaN(wiek) && wiek != 0){
+                    $("#bladWiek").text("Wiek musi być liczbą")
+                }else {
+                    $("#bladWiek").text("Masz " + wiek + " lat.")
+                }
+            })
+
+            $("#sprawdzOcene").click(function(){
+                $("#zapisane").text("")
+                let ocena = Number($("#ocena").val().trim())
+
+                if(ocena >= 1 && ocena < 6){
+                    $("#bladOcena").text("Ocena musi być w zakresie 1-6 oraz nie moze byc pusta")
+                }else {
+                    $("#zapisane").text("Zapisano ocenę: " + ocena)
+                }
+            })
+        })
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="nazwisko">
+    <button id="send">Wyslij</button>
+    <p id="blad"></p>
+    <p id="wiadomosc"></p>
+
+    <hr>
+
+    <input type="text" id="wiek">
+    <button id="sprawdzWiek">Sprawdz</button>
+    <p id="bladWiek"></p>
+    <hr>
+
+    <input type="text" id="ocena">
+    <button id="sprawdzOcene">Zapisz</button>
+    <p id="bladOcena"></p>
+    <p id="zapisane"></p>
+</body>
+</html>
