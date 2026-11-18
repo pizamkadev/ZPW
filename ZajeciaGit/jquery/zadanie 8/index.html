@@ -21,9 +21,16 @@
             // $("#zapisz").click(function(){
             //     $("#sekret").show(1000)
             // })
-
+            let tak = false
             $("#przelacz").click(function(){
-                $("#opis").toggle()
+                if (tak){
+                    $("#opis").slideUp(1000)
+                    tak = true
+                }else {
+                    $("#opis").slideDown(1000)
+                    tak = false
+                }
+               
             })
         })
     </script>
